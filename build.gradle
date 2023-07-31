@@ -41,7 +41,8 @@ wpi.sim.addGui().defaultEnabled = true
 wpi.sim.addDriverstation()
 
 //Sets the websocket client remote host.
-wpi.sim.envVar("HALSIMWS_HOST", "192.168.137.198")
+//TODO make sure the IP is right
+wpi.sim.envVar("HALSIMWS_HOST", "192.168.137.43")
 wpi.sim.addWebsocketsServer().defaultEnabled = true
 wpi.sim.addWebsocketsClient().defaultEnabled = true
 

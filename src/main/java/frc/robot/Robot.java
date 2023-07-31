@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -27,6 +28,7 @@ public class Robot extends TimedRobot {
   private final Servo claw = new Servo(Constants.ARM_CLAW);
   private final Arm arm = new Arm(wrist, shoulder, claw);
   private final Timer t = new Timer();
+  private final Joystick control = new Joystick(0);
   private boolean complete = false;
 
   Order order = null;
@@ -65,13 +67,16 @@ public class Robot extends TimedRobot {
     t.start();
     drivetrain.resetEncoders();
     auto.resetAuto();
+    arm.setClaw(0.5);
     order = CallAPI.GETOrder(order);
+    
   }
 
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() 
   {    
+    
     if (autoMoving && auto.autoMovePeriodic()) complete = true;
     else if (!autoMoving && !complete)
     {
@@ -81,16 +86,17 @@ public class Robot extends TimedRobot {
       auto.setAutoMoveQueue(miq);
       autoMoving = true;
     }
+    SmartDashboard.putNumber("Claw Value", Math.abs(arm.getClaw()));
   }
 
   private MovementInstruction[] configCustomMIQ()
   {
     MovementInstruction[] miq = new MovementInstruction[5];
-    miq[0] = new MovementInstruction(5, MovementType.drive);
-    miq[1] = new MovementInstruction(-360, MovementType.turn);
-    miq[2] = new MovementInstruction(-5, MovementType.drive);
-    miq[3] = new MovementInstruction(540, MovementType.turn);
-    miq[4] = new MovementInstruction(-180, MovementType.turn);
+    miq[0] = new MovementInstruction(0, MovementType.claw);
+    miq[1] = new MovementInstruction(2, MovementType.drive);
+    miq[2] = new MovementInstruction(0.55, MovementType.claw);
+    miq[3] = new MovementInstruction(-2, MovementType.drive);
+    miq[4] = new MovementInstruction(0, MovementType.claw);
     return miq;
   }
 

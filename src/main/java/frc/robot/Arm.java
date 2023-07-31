@@ -20,6 +20,11 @@ public class Arm
         claw.set(num);
     }
 
+    public double getClaw()
+    {
+        return claw.get();
+    }
+
     public double clamp(double top, double bot, double val)
     {
         if (val > top)

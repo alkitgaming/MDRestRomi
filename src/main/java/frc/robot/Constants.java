@@ -36,6 +36,9 @@ public class Constants {
     public static final double MAIN_DRIVE_DISTANCE_MID = 2;
     public static final double MAIN_DRIVE_DISTANCE_FAR = 3;
 
+    public static final double CLAW_ALLOWED_ERROR = 0.01;
+    public static final double CLAW_MOVE_SPEED = 0.0025;
+
     //Field and positioning
 
 }

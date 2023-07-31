@@ -32,7 +32,7 @@ public class Automation
     } 
 
     if (autoMoveQueue[currentMI].getType() == MovementType.drive 
-    && autoDrive(autoMoveQueue[currentMI].getValue() * 0.9)) 
+    && autoDrive(autoMoveQueue[currentMI].getValue())) 
       nextQueuedMove();
 
     else if (autoMoveQueue[currentMI].getType() == MovementType.turn 
@@ -67,6 +67,7 @@ public class Automation
   {
     currentMI++;
     drive.resetEncoders();
+    drive.arcadeDrive(0, 0);
   }
 
   private void dashboard() throws ArrayIndexOutOfBoundsException
@@ -83,6 +84,7 @@ public class Automation
     if ( Math.abs(value - drive.getDistanceInch()) < Constants.AUTODRIVE_ALLOW_ERROR_INCH)
     {
       drive.resetEncoders();
+      drive.autoArcadeDrive(0);
       return true;
     } 
     drive.autoArcadeDrive(value);
@@ -94,6 +96,7 @@ public class Automation
     if (Math.abs(value - drive.getEncoderAsAngleDeg()) < Constants.AUTOTURN_ALLOW_ERROR_DEG) 
     {
       drive.resetEncoders();
+      drive.autoArcadeDrive(0);
       return true;
     }
     drive.autoTurn(value);
@@ -108,7 +111,17 @@ public class Automation
   //TODO implement auto arm methods when possible
   private boolean autoClaw(double value) 
   {
-    return false;
+    if (value > arm.getClaw() + Constants.CLAW_ALLOWED_ERROR)
+    {
+      arm.setClaw(arm.getClaw() + Constants.CLAW_MOVE_SPEED);
+      return false;
+    }
+    else if (value < arm.getClaw() - Constants.CLAW_ALLOWED_ERROR)
+    {
+      arm.setClaw(arm.getClaw() - Constants.CLAW_MOVE_SPEED);
+      return false;
+    }
+    else return true;
   }
 
   private boolean autoWrist(double value)
