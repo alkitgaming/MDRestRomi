@@ -20,9 +20,29 @@ public class Arm
         claw.set(num);
     }
 
+    public void setWrist(double num)
+    {
+        wrist.set(num);
+    }
+
+    public void setShoulder(double num)
+    {
+        shoulder.set(num);
+    }
+
     public double getClaw()
     {
         return claw.get();
+    }
+
+    public double getWrist()
+    {
+        return wrist.get();
+    }
+
+    public double getShoulder()
+    {
+        return shoulder.get();
     }
 
     public double clamp(double top, double bot, double val)

@@ -1,7 +1,5 @@
 package frc.robot;
 
-import java.lang.reflect.Array;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Automation 
@@ -126,12 +124,32 @@ public class Automation
 
   private boolean autoWrist(double value)
   {
-    return false;
+    if (value > arm.getWrist() + Constants.WRIST_ALLOWED_ERROR)
+    {
+      arm.setWrist(arm.getWrist() + Constants.WRIST_MOVE_SPEED);
+      return false;
+    }
+    else if (value < arm.getWrist() - Constants.WRIST_ALLOWED_ERROR)
+    {
+      arm.setWrist(arm.getWrist() - Constants.WRIST_MOVE_SPEED);
+      return false;
+    }
+    else return true;
   }
 
   private boolean autoShoulder(double value)
   {
-    return false;
+    if (value > arm.getShoulder() + Constants.SHOULDER_ALLOWED_ERROR)
+    {
+      arm.setShoulder(arm.getShoulder() + Constants.SHOULDER_MOVE_SPEED);
+      return false;
+    }
+    else if (value < arm.getShoulder() - Constants.SHOULDER_ALLOWED_ERROR)
+    {
+      arm.setShoulder(arm.getShoulder() - Constants.SHOULDER_MOVE_SPEED);
+      return false;
+    }
+    else return true;
   } 
 
   public static double clamp(double val, double min, double max)

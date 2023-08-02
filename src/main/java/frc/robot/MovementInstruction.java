@@ -34,15 +34,15 @@ public class MovementInstruction
         array[0] = new MovementInstruction(primaryDriveDistance, MovementType.drive);
         array[1] = new MovementInstruction(turnDegrees, MovementType.turn);
         array[2] = new MovementInstruction(secondaryDriveDistance, MovementType.drive);
-        //array[3] = new MovementInstruction(, MovementType.wrist);
-        //array[4] = new MovementInstruction(, MovementType.shoulder);
-        //array[5] = new MovementInstruction(, MovementType.claw);
-        //array[6] = new MovementInstruction(, MovementType.shoulder);
-        //array[7] = new MovementInstruction(, MovementType.wrist);
+        array[3] = new MovementInstruction(wrist, MovementType.wrist);
+        array[4] = new MovementInstruction(shoulder, MovementType.shoulder);
+        array[5] = new MovementInstruction(claw, MovementType.claw);
+        array[6] = new MovementInstruction(Constants.TRAVEL_SHOULDER, MovementType.shoulder);
+        array[7] = new MovementInstruction(Constants.TRAVEL_WRIST, MovementType.wrist);
         array[8] = new MovementInstruction(-secondaryDriveDistance, MovementType.drive);
         array[9] = new MovementInstruction(-turnDegrees, MovementType.turn);
         array[10] = new MovementInstruction(primaryDriveDistance, MovementType.drive);
-        //array[11] = new MovementInstruction(, MovementType.claw);
+        array[11] = new MovementInstruction(Constants.OPEN_CLAW, MovementType.claw);
         array[12] = new MovementInstruction(180, MovementType.turn);
         
         return array;

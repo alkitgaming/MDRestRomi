@@ -38,7 +38,16 @@ public class Constants {
 
     public static final double CLAW_ALLOWED_ERROR = 0.01;
     public static final double CLAW_MOVE_SPEED = 0.0025;
+    public static final double WRIST_ALLOWED_ERROR = 0.01;
+    public static final double WRIST_MOVE_SPEED = 0.0025;
+    public static final double SHOULDER_ALLOWED_ERROR = 0.01;
+    public static final double SHOULDER_MOVE_SPEED = 0.0025;
 
+    public static final double TRAVEL_CLAW = 0;
+    public static final double OPEN_CLAW = 0;
+
+    public static final double TRAVEL_SHOULDER = 1;
+    public static final double TRAVEL_WRIST = 0.5;
     //Field and positioning
 
 }
