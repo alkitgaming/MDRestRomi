@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 
@@ -14,8 +13,6 @@ public class Drivetrain
   private final Spark rightMotor;
   private final Encoder leftEncoder;
   private final Encoder rightEncoder;
-  private final PIDController drivePID;
-  private final PIDController turnPID;
     
   public Drivetrain(Spark leftMotor, Spark rightMotor, Encoder leftEncoder, Encoder rightEncoder)
   {
@@ -28,9 +25,6 @@ public class Drivetrain
     rightEncoder.setDistancePerPulse((Math.PI * Constants.ENC_WHEEL_DIAMETER_IN) / Constants.ENC_TICKS_PER_REVOLUTION);
     resetEncoders();
     rightMotor.setInverted(true);
-
-    drivePID = new PIDController(Constants.DRIVE_P, 0, 0);
-    turnPID = new PIDController(Constants.TURN_P, 0, 0);
   }
   
 
@@ -62,10 +56,6 @@ public class Drivetrain
     else if (set < 0) arcadeDrive(0, -0.25);
   }
 
-
-
-
-  //TODO implement gyro stuff
   /*
    * distance divided by circumference is number of full circles
    * 360 degrees in a circle, so must multiply by 360

@@ -5,7 +5,6 @@ public class MovementInstruction
     private double value;
     private MovementType type;
 
-    //TODO change to new movement queue type (secondary drive and arm movements)
     public static MovementInstruction[] generateMoveQueue(Order order)
     { 
         MovementInstruction[] array = new MovementInstruction[Constants.MOVEMENT_QUEUE_LENGTH];
@@ -25,10 +24,18 @@ public class MovementInstruction
             break;
         }
 
-        int secondaryDriveDistance = 0, wrist = 0, claw = 0, shoulder = 0;
-        switch(order.getID())
+        double secondaryDriveDistance = 0, wrist = 0, claw = 0, shoulder = 0;
+        int orderid = order.getID();
+        for (ArmMoveData a : Constants.ARM_MOVE_DATA)
         {
-
+            if (a.id() == orderid)
+            {
+                secondaryDriveDistance = a.drive2();
+                claw = a.claw();
+                wrist = a.wrist();
+                shoulder = a.shoulder();
+                break;
+            }
         }
         
         array[0] = new MovementInstruction(primaryDriveDistance, MovementType.drive);
@@ -44,7 +51,6 @@ public class MovementInstruction
         array[10] = new MovementInstruction(primaryDriveDistance, MovementType.drive);
         array[11] = new MovementInstruction(Constants.OPEN_CLAW, MovementType.claw);
         array[12] = new MovementInstruction(180, MovementType.turn);
-        
         return array;
     }
 
@@ -57,7 +63,7 @@ public class MovementInstruction
     /*
      *  Returns the turning value in degrees,
      *  the drive distance in inches,
-     *  or the arm setpoint in TODO write unit
+     *  or the arm setpoint on 0 to 1 scale
      */
     public double getValue()
     {

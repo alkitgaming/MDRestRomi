@@ -48,6 +48,10 @@ public class Constants {
 
     public static final double TRAVEL_SHOULDER = 1;
     public static final double TRAVEL_WRIST = 0.5;
+
+    public static final ArmMoveData[] ARM_MOVE_DATA = {ArmMoveData.example, ArmMoveData.pencil};
     //Field and positioning
+
+
 
 }

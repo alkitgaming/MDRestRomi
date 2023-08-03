@@ -106,7 +106,6 @@ public class Automation
     currentMI = 0;
   }
 
-  //TODO implement auto arm methods when possible
   private boolean autoClaw(double value) 
   {
     if (value > arm.getClaw() + Constants.CLAW_ALLOWED_ERROR)
